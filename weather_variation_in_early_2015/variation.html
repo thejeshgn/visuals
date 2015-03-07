@@ -1,0 +1,53 @@
+<html lang='en'>
+<head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta property='og:title' content='Bangalore Weather Feb 2015' />
+    <meta property='og:description' content='Weather variation Feb 2015.' />
+    <meta property='og:type' content='website' />
+    <title>Bangalore Weather Feb 2015</title>
+    <link href='../lib/metricsgraphics.css' rel='stylesheet' type='text/css'>
+    <script src='../lib/d3.min.js' charset='utf-8'></script>
+    <script src='../lib/metricsgraphics.min.js'></script>
+</head>
+<body>
+
+
+
+
+
+
+
+  <div id='log3'></div>
+
+
+
+
+<script>
+    var torso = {};
+    torso.width = 600;
+    torso.height = 400;
+    torso.right = 20;
+
+
+    d3.json('weather_min_max_data.json', function(data){
+        data = [data];
+        for(var i = 0;i < data.length; i++) {
+            data[i] = MG.convert.date(data[i], 'date');
+        }
+
+
+        // add a multi-line chart
+        MG.data_graphic({
+            data: data,
+            width: torso.width,
+            height: torso.height,
+            right: torso.right,
+            target: '#log3',
+            x_accessor: 'date',
+            y_accessor: 'difference'
+        });
+        
+        });
+
+</script>
+</body>
