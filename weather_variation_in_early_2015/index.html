@@ -5,9 +5,8 @@
     <meta property='og:description' content='Weather variation Feb 2015.' />
     <meta property='og:type' content='website' />
     <title>Bangalore Weather Feb 2015</title>
-    <link href='../lib/metricsgraphics.css' rel='stylesheet' type='text/css'>
-    <script src='../lib/d3.min.js' charset='utf-8'></script>
-    <script src='../lib/metricsgraphics.min.js'></script>
+    <link href='../lib/pykcharts.1.0.0.min.css' rel='stylesheet' type='text/css'>
+    <script src='../lib/pykcharts.1.0.0.min.js'></script>
 </head>
 <body>
 
@@ -15,76 +14,47 @@
 
 
 
-<div id='log1'></div>
-
-  <div id='log2'></div>
-
-  <div id='log3'></div>
-
+  <div id='my_chart'></div>
 
 
 
 <script>
-    var torso = {};
-    torso.width = 500;
-    torso.height = 300;
-    torso.right = 20;
-
-    var trunk = {};
-    trunk.width = 320;
-    trunk.height = 150;
-    trunk.left = 35;
-    trunk.right = 10;
-    trunk.xax_count = 5;
-
-    var small = {};
-    small.width = 240;
-    small.height = 140;
-    small.left = 20;
-    small.right = 20;
-    small.top = 20;
-    small.xax_count = 5;
-
-    d3.json('weather_min_max_data.json', function(data){
-        data = [data];
-        for(var i = 0;i < data.length; i++) {
-            data[i] = MG.convert.date(data[i], 'date');
-        }
-
-
-        // add a multi-line chart
-        MG.data_graphic({
-            title:"Max Temp",
-            data: data,
-            width: torso.width,
-            height: torso.height,
-            right: torso.right,
-            target: '#log1',
-            x_accessor: 'date',
-            y_accessor: 'day_max'
-        });
-        MG.data_graphic({
-            title:"Min Temp",
-            data: data,
-            width: torso.width,
-            height: torso.height,
-            right: torso.right,
-            target: '#log2',
-            x_accessor: 'date',
-            y_accessor: 'day_min'
-        });
-        MG.data_graphic({
-            title:"Temperature Difference Between Day High and Low",
-            data: data,
-            width: torso.width,
-            height: torso.height,
-            right: torso.right,
-            target: '#log3',
-            x_accessor: 'date',
-            y_accessor: 'difference'
-        });
-        
-        });
-
+  window.PykChartsInit = function (e) {
+    var k = new PykCharts.multiD.multiSeriesLine({
+      "selector": "#my_chart",
+      "chart_width": 600,
+      "chart_height": 400,
+      "title_text": "Early 2015",
+      "title_color": "black",
+      "title_size": 3,
+      "title_weight": "normal",
+      "title_family": "Garamond",
+      "subtitle_text": "Daily Max and Min Temperature",
+      "subtitle_color": "gray",
+      "subtitle_size": 2,
+      "subtitle_weight": "normal",
+      "subtitle_family": "Arial",
+      "export_enable": "yes",
+      "axis_x_enable": "yes",
+      "axis_x_time_value_datatype":"month",
+      "axis_x_title": "Jan to March 2015",
+      "axis_y_title": "Temperature",
+      "zoom_enable" : "no",
+      "zoom_level" : 3,
+      "axis_onhover_highlight_enable": "yes",
+      "color_mode":"color",
+      "data": "weather_min_max_data.csv",
+      "chart_color": ["#0000CC","#66CCFF"],
+      "chart_margin_top": 10, 
+      "chart_margin_right": 10, 
+      "chart_margin_bottom": 20, 
+      "chart_margin_left": 50,      
+      "credit_my_site_name": "Thejesh GN",
+      "credit_my_site_url":  "https://thejeshgn.com",
+      "data_source_name": "OpenBangalore",
+      "data_source_url": "http://openbangalore.org/",
+    });
+    k.execute();
+  }
 </script>
 </body>

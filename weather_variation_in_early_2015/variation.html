@@ -5,9 +5,8 @@
     <meta property='og:description' content='Weather variation Feb 2015.' />
     <meta property='og:type' content='website' />
     <title>Bangalore Weather Feb 2015</title>
-    <link href='../lib/metricsgraphics.css' rel='stylesheet' type='text/css'>
-    <script src='../lib/d3.min.js' charset='utf-8'></script>
-    <script src='../lib/metricsgraphics.min.js'></script>
+    <link href='../lib/pykcharts.1.0.0.min.css' rel='stylesheet' type='text/css'>
+    <script src='../lib/pykcharts.1.0.0.min.js'></script>
 </head>
 <body>
 
@@ -15,39 +14,47 @@
 
 
 
-
-
-  <div id='log3'></div>
-
+  <div id='my_chart'></div>
 
 
 
 <script>
-    var torso = {};
-    torso.width = 600;
-    torso.height = 400;
-    torso.right = 20;
-
-
-    d3.json('weather_min_max_data.json', function(data){
-        data = [data];
-        for(var i = 0;i < data.length; i++) {
-            data[i] = MG.convert.date(data[i], 'date');
-        }
-
-
-        // add a multi-line chart
-        MG.data_graphic({
-            data: data,
-            width: torso.width,
-            height: torso.height,
-            right: torso.right,
-            target: '#log3',
-            x_accessor: 'date',
-            y_accessor: 'difference'
-        });
-        
-        });
-
+  window.PykChartsInit = function (e) {
+    var k = new PykCharts.multiD.line({
+      "selector": "#my_chart",
+      "title_text": "Daily Variation",
+      "title_color": "black",
+      "title_size": 3,
+      "title_weight": "normal",
+      "title_family": "Garamond",
+      "subtitle_text": "Difference between Daily Max & Daily Min Temperature",
+      "subtitle_color": "gray",
+      "subtitle_size": 1,
+      "subtitle_weight": "normal",
+      "subtitle_family": "Arial",
+      "export_enable": "yes",
+      "axis_x_enable": "yes",
+      "axis_x_time_value_datatype":"month",
+      "axis_x_title": "Jan to March 2015",
+      "axis_y_title": "Diff Temperature",
+      "zoom_enable" : "no",
+      "axis_onhover_highlight_enable": "yes",
+      "crosshair_enable": "yes",
+      "tooltip_enable": "yes",
+      "zoom_level" : 3,
+      "color_mode":"color",
+      "data": "weather_temp_diff_data.csv",
+      "chart_color": ["#0000CC","#66CCFF"],
+      "chart_margin_top": 10, 
+      "chart_margin_right": 10, 
+      "chart_margin_bottom": 20, 
+      "chart_margin_left": 50,      
+      "credit_my_site_name": "Thejesh GN",
+      "credit_my_site_url":  "https://thejeshgn.com",
+      "data_source_name": "OpenBangalore",
+      "data_source_url": "http://openbangalore.org/",
+    });
+    k.execute();
+  }
 </script>
 </body>
