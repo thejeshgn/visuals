@@ -1,0 +1,18 @@
+<html>
+<head>
+	<script src="https://thejeshgn.com/lib_files/vue/vue_v1.min.js" ></script>
+</head>
+<body id="demo" bgColor="{{message}}" style="vertical-align: middle; text-align: center; height: 100%;">
+	<center>
+  	<input v-model="message">
+  	<center>
+</body>
+	<script>
+	var demo = new Vue({
+  		el: '#demo',
+	  data: {
+	    message: 'Thejesh GN'
+	  }
+	});
+	</script>
+</html>
